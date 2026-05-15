@@ -28,6 +28,11 @@ Then, create a file called programname.conf under /etc/nginx/sites-available and
         }
     }
 
+Now symlink the file and restart nginx
+
+    sudo ln -s /etc/nginx/sites-available/programname.conf /etc/nginx/sites-enabled/programname.conf
+    sudo systemctl restart nginx
+
 Next, make sure that the domain you entered is in your domain registrar
 
 Now we install certbot
