@@ -33,6 +33,17 @@ Now symlink the file and restart nginx
     sudo ln -s /etc/nginx/sites-available/programname.conf /etc/nginx/sites-enabled/programname.conf
     sudo systemctl restart nginx
 
+Now run this command to test for errors
+
+    sudo nginx -t
+
+If you see something that says:
+
+    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+    nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+You are free to move on
+
 Next, make sure that the domain you entered is in your domain registrar
 
 Now we install certbot
