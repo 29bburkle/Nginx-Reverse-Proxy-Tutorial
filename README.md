@@ -1,22 +1,42 @@
 # Basic-nginx-reverse-proxy-config
-A sample nginx reverse proxy config for those who need it. Make sure to replace {DOMAIN} with your domain/subdomain and {PORT} with the port that your program is listening on
+Here is a tutorial on how to put a already port forwarded program onto your domain using NGINX and Certbot! This is assuming you are using Ubuntu Server 
 
-server {
-    listen 80;
-    listen [::]:80;
+First, install nginx
 
-    server_name {DOMAIN};
+    sudo apt install nginx
+
+Next, delete the default nginx conf file
+
+    rm /etc/nginx/sites-enabled/default
+
+Then, create a file called {WEBSITENAME}.conf under /etc/nginx/sites-available and copy and paste this in it, Make sure to replace {DOMAIN} with your domain name and {PORT} with the port your program is listening on
+
+    server {
+        listen 80;
+        listen [::]:80;
+ 
+        server_name {DOMAIN};
         
-    location / {
-        proxy_pass http://127.0.0.1:{PORT};
-        include proxy_params;
+        location / {
+            proxy_pass http://127.0.0.1:{PORT};
+            include proxy_params;
 
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
     }
-}
 
+Next, make sure that the domain you entered is in your domain registrar
 
-TIP: If you are using certbot, it will automatically do the ssl cert stuff
+Now we install certbot
+
+    sudo apt install certbot
+    sudo apt install python3-certbot-nginx
+
+Now run this command to make an ssl certificate under your domain name. (You do not need to edit the nginx conf file, certbot will handle it.)
+
+    sudo certbot --nginx -d {DOMAIN}
+
+Now go to your domain on another device, (you have to use a vpn if you are on the same network as the server with the program), and you should see your program. Hope this tutorial worked for you.
