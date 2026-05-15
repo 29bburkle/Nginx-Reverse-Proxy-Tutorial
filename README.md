@@ -1,4 +1,4 @@
-# Basic-nginx-reverse-proxy-config
+# 29bburkle's Nginx Reverse Proxy Tutorial
 Here is a tutorial on how to put a already port forwarded program onto your domain using NGINX and Certbot! This is assuming you are using Ubuntu Server 
 
 First, install nginx
