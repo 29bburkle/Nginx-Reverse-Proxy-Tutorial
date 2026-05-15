@@ -7,7 +7,7 @@ First, install nginx
 
 Next, delete the default nginx conf file
 
-    rm /etc/nginx/sites-enabled/default
+    sudo rm /etc/nginx/sites-enabled/default
 
 Then, create a file called {WEBSITENAME}.conf under /etc/nginx/sites-available and copy and paste this in it, Make sure to replace {DOMAIN} with your domain name and {PORT} with the port your program is listening on
 
